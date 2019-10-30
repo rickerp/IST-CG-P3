@@ -1,7 +1,7 @@
 import './three.js';
 import Room from './room.js';
 import Painting from './painting.js';
-import Icosahedron from './icosahedron.js';
+import Sculpture from './sculpture.js';
 
 var renderer = null;
 var scene = null;
@@ -12,7 +12,7 @@ var cameras = [];
 var camera = null;
 
 var painting = null;
-var icosahedron = null;
+var sculpture = null;
 
 function init() {
 	renderer = new THREE.WebGLRenderer({
@@ -27,18 +27,18 @@ function init() {
 	createRoom(0, 0, 0);
 
 	painting = createPainting(0, 20, 0);
-	icosahedron = createIcosahedron(0, 20, 20);
+	sculpture = createSculpture(0, 20, 20);
 
 	cameras[0] = createCamera(10, 20, 0, 0); // ortographic camera
-	cameras[1] = createCamera(40, 20, 20, 1); // pespective camera
+	cameras[1] = createCamera(60, 40, 20, 1); // pespective camera
 
 	camera = cameras[0];
 	camera.lookAt(painting.position);
-	camera.zoom = 3;
+	camera.zoom = 5;
 	camera.updateProjectionMatrix();
 
-	cameras[1].lookAt(icosahedron.position);
-	cameras[1].zoom = 4;
+	cameras[1].lookAt(sculpture.position);
+	cameras[1].zoom = 2;
 	updateCameras();
 
 	window.addEventListener('keydown', onKeyDown);
@@ -64,10 +64,10 @@ function createPainting(x, y, z) {
 	return painting;
 }
 
-function createIcosahedron(x, y, z) {
-	let icosahedron = new Icosahedron(x, y, z);
-	scene.add(icosahedron);
-	return icosahedron;
+function createSculpture(x, y, z) {
+	let sculpture = new Sculpture(x, y, z);
+	scene.add(sculpture);
+	return sculpture;
 }
 
 function updateCameras() {
@@ -155,7 +155,7 @@ function render() {
 }
 
 function update(delta) {
-	icosahedron.rotateY(delta * 1.2);
+	sculpture.children[2].rotateY(delta * 1.2);
 }
 
 function animate(ts) {
