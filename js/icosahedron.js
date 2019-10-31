@@ -9,13 +9,13 @@ export default class Icosahedron extends THREE.Object3D {
 		});
 
 		this.geometry = new THREE.Geometry();
-		this.createGeometry();
+		this.createGeometry(1, 1, 1);
 
 		this.add(new THREE.Mesh(this.geometry, this.material));
 		this.position.set(x, y, z);
 	}
 
-	createGeometry() {
+	createGeometry(x, y, z) {
 		let a = (1 + Math.sqrt(5)) / 2; // golden number
 
 		let v0 = new THREE.Vector3(0, 1, a);
@@ -74,5 +74,8 @@ export default class Icosahedron extends THREE.Object3D {
 		this.geometry.faces.push(new THREE.Face3(11, 8, 6));
 		this.geometry.faces.push(new THREE.Face3(11, 6, 4));
 		this.geometry.faces.push(new THREE.Face3(11, 4, 1));
+
+		this.geometry.scale(x, y, z);
+		this.geometry.computeFaceNormals();
 	}
 }
