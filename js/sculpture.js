@@ -12,7 +12,7 @@ export default class Sculpture extends THREE.Object3D {
 	}
 
 	createPedestal(x, y, z) {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0xffffff,
 		});
 

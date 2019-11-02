@@ -3,7 +3,7 @@ import './three.js';
 export default class Icosahedron extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
-		this.material = new THREE.MeshBasicMaterial({
+		this.material = new THREE.MeshPhongMaterial({
 			color: 0xff0000,
 			wireframe: true,
 		});

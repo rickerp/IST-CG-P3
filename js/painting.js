@@ -11,7 +11,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createBackground() {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0x666666,
 		});
 		let geometry = new THREE.CubeGeometry(0, 19, 25);
@@ -19,7 +19,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createGrid() {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0x000000,
 		});
 		let geometry = new THREE.CubeGeometry(0, 1.5, 1.5);
@@ -34,7 +34,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createDots() {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0xffffff,
 		});
 		let geometry = new THREE.CylinderGeometry(0.4, 0.4, 0.1, 32, 32);
@@ -50,7 +50,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createFrame() {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0x5c3705,
 		});
 
