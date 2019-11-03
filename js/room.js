@@ -3,7 +3,7 @@ import './three.js';
 export default class Room extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
-		this.material = new THREE.MeshPhongMaterial({
+		this.material = new THREE.MeshBasicMaterial({
 			color: 0xaaaaaa,
 		});
 
@@ -24,5 +24,13 @@ export default class Room extends THREE.Object3D {
 		let wall = new THREE.Mesh(geometry, this.material);
 		wall.position.set(x, y, z);
 		this.add(wall);
+	}
+
+	changeMaterial(material) {
+		this.children.map(child => {
+			var childMat = material.clone();
+			childMat.color = child.material.color.clone();
+			child.material = childMat;
+		});
 	}
 }

@@ -11,8 +11,12 @@ var lastTimestamp = 0;
 var cameras = [];
 var camera = null;
 
+var materials = [];
+var material = null;
+
 var dirLight = null;
 
+var room = null;
 var painting = null;
 var sculpture = null;
 
@@ -26,8 +30,7 @@ function init() {
 
 	addScene();
 
-	addRoom(0, 0, 0);
-
+	room = addRoom(0, 0, 0);
 	painting = addPainting(0, 20, 0);
 	sculpture = addSculpture(0, 20, 20);
 
@@ -43,19 +46,25 @@ function init() {
 	cameras[1].zoom = 2;
 	updateCameras();
 
+	materials[0] = new THREE.MeshBasicMaterial();
+	materials[1] = new THREE.MeshPhongMaterial();
+	materials[2] = new THREE.MeshLambertMaterial();
+	material = materials[0];
+
 	dirLight = addLight(100, 100, 0);
 
 	window.addEventListener('keydown', onKeyDown);
 	window.addEventListener('keyup', onKeyUp);
 	window.addEventListener('resize', onResize);
 
+	console.log(camera);
 	animate(lastTimestamp);
 }
 
 //////////// ADD FUNCTIONS ////////////
 
 function addLight(x, y, z) {
-	let light = new THREE.DirectionalLight(0xffffff, 1);
+	let light = new THREE.DirectionalLight(0xffffff, 1.2);
 	light.position.set(x, y, z);
 	scene.add(light);
 	console.log(scene);
@@ -65,6 +74,7 @@ function addLight(x, y, z) {
 function addRoom(x, y, z) {
 	let room = new Room(x, y, z);
 	scene.add(room);
+	return room;
 }
 
 function addPainting(x, y, z) {
@@ -167,6 +177,15 @@ function onKeyDown(e) {
 			break;
 		case 81: // Q - toggle dir_light
 			toggleLight();
+			break;
+		case 87: // W - toggle basic/non-basic
+			material = materials[materials.indexOf(material) ? 0 : 1];
+			break;
+		case 69: // E - toggle phong/lambert
+			if (materials.indexOf(material)) {
+				material = materials[materials.indexOf(material) - 1 ? 1 : 2];
+			}
+			break;
 	}
 }
 
@@ -174,8 +193,15 @@ function render() {
 	renderer.render(scene, camera);
 }
 
+function updateMaterials() {
+	room.changeMaterial(material);
+	sculpture.changeMaterial(material);
+	painting.changeMaterial(material);
+}
+
 function update(delta) {
 	sculpture.children[2].rotateY(delta * 1.2);
+	updateMaterials();
 }
 
 function animate(ts) {

@@ -3,12 +3,14 @@ import './three.js';
 export default class Icosahedron extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
-		this.material = new THREE.MeshPhongMaterial({
+		this.material = new THREE.MeshBasicMaterial({
 			color: 0xff0000,
 			wireframe: true,
 		});
 
 		this.createGeometry(1, 1, 1);
+		this.ico = new THREE.Mesh(this.geometry, this.material);
+		this.add(this.ico);
 
 		this.position.set(x, y, z);
 	}
@@ -76,6 +78,14 @@ export default class Icosahedron extends THREE.Object3D {
 
 		this.geometry.scale(x, y, z);
 		this.geometry.computeFaceNormals();
-		this.add(new THREE.Mesh(this.geometry, this.material));
+
+		return this.geometry;
+	}
+
+	changeMaterial(material) {
+		var mat = material.clone();
+		mat.color = this.ico.material.color.clone();
+		mat.wireframe = true;
+		this.ico.material = mat;
 	}
 }
