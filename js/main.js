@@ -57,7 +57,6 @@ function init() {
 	window.addEventListener('keyup', onKeyUp);
 	window.addEventListener('resize', onResize);
 
-	console.log(camera);
 	animate(lastTimestamp);
 }
 
@@ -67,7 +66,6 @@ function addLight(x, y, z) {
 	let light = new THREE.DirectionalLight(0xffffff, 1.2);
 	light.position.set(x, y, z);
 	scene.add(light);
-	console.log(scene);
 	return light;
 }
 
