@@ -5,7 +5,6 @@ export default class Icosahedron extends THREE.Object3D {
 		super();
 		this.material = new THREE.MeshBasicMaterial({
 			color: 0xff0000,
-			wireframe: true,
 		});
 
 		this.createGeometry(1, 1, 1);
@@ -85,7 +84,6 @@ export default class Icosahedron extends THREE.Object3D {
 	changeMaterial(material) {
 		var mat = material.clone();
 		mat.color = this.ico.material.color.clone();
-		mat.wireframe = true;
 		this.ico.material = mat;
 	}
 }
