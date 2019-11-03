@@ -33,7 +33,7 @@ export default class SpotLight extends THREE.Object3D {
 
 	toggleLight(state = !this.light.visible) {
 		this.light.visible = state;
-		let color = state ? 0xffff99 : 0x222222;
+		let color = state ? 0xffff99 : 0x444444;
 		this.ball.material.color = new THREE.Color(color);
 	}
 }
