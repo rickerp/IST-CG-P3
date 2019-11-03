@@ -2,6 +2,7 @@ import './three.js';
 import Room from './room.js';
 import Painting from './painting.js';
 import Sculpture from './sculpture.js';
+import SpotLight from './spotlight.js';
 
 var renderer = null;
 var scene = null;
@@ -15,6 +16,7 @@ var materials = [];
 var material = null;
 
 var dirLight = null;
+var spotlights = [];
 
 var room = null;
 var painting = null;
@@ -27,31 +29,33 @@ function init() {
 
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
-
 	addScene();
 
-	room = addRoom(0, 0, 0);
-	painting = addPainting(0, 20, 0);
-	sculpture = addSculpture(0, 20, 20);
-
 	cameras[0] = addCamera(10, 20, 0, 0); // ortographic camera
-	cameras[1] = addCamera(60, 40, 20, 1); // pespective camera
-
-	camera = cameras[0];
-	camera.lookAt(painting.position);
-	camera.zoom = 5;
-	camera.updateProjectionMatrix();
-
-	cameras[1].lookAt(sculpture.position);
-	cameras[1].zoom = 2;
-	updateCameras();
+	cameras[1] = addCamera(50, 30, 0, 1); // pespective camera
+	camera = cameras[1];
 
 	materials[0] = new THREE.MeshBasicMaterial();
 	materials[1] = new THREE.MeshPhongMaterial();
 	materials[2] = new THREE.MeshLambertMaterial();
 	material = materials[0];
 
-	dirLight = addLight(100, 100, 0);
+	dirLight = addDirLight(100, 100, 0);
+	spotlights[0] = addSpotLight(20, 40, 30);
+	spotlights[1] = addSpotLight(20, 40, -30);
+	spotlights[2] = addSpotLight(-20, 40, 30);
+	spotlights[3] = addSpotLight(-20, 40, -30);
+
+	room = addRoom(0, 0, 0);
+	painting = addPainting(0, 20, 0);
+	sculpture = addSculpture(0, 20, 20);
+
+	cameras[0].lookAt(painting.position);
+	cameras[1].lookAt(0, 20, 0);
+	cameras[0].zoom = 5;
+	cameras[1].zoom = 1;
+	camera.updateProjectionMatrix();
+	updateCameras();
 
 	window.addEventListener('keydown', onKeyDown);
 	window.addEventListener('keyup', onKeyUp);
@@ -62,8 +66,16 @@ function init() {
 
 //////////// ADD FUNCTIONS ////////////
 
-function addLight(x, y, z) {
-	let light = new THREE.DirectionalLight(0xffffff, 1.2);
+function addSpotLight(x, y, z) {
+	let light = new SpotLight();
+	light.position.set(x, y, z);
+	scene.add(light);
+	light.lookAt(scene.position);
+	return light;
+}
+
+function addDirLight(x, y, z) {
+	let light = new THREE.DirectionalLight(0xffffff, 0.9);
 	light.position.set(x, y, z);
 	scene.add(light);
 	return light;
@@ -108,12 +120,6 @@ function addCamera(x, y, z, type) {
 function addScene() {
 	scene = new THREE.Scene();
 	scene.add(new THREE.AxisHelper(10));
-}
-
-//////////// ACTION FUNCTIONS ////////////
-
-function toggleLight(on = !dirLight.visible) {
-	dirLight.visible = on;
 }
 
 //////////// UPDATE FUNCTIONS ////////////
@@ -167,17 +173,24 @@ function onKeyDown(e) {
 	keys[e.keyCode] = true;
 
 	switch (e.keyCode) {
-		case 49: // 1 - upper_camera
-			camera = cameras[0];
-			break;
-		case 50: // 2 - front_camera
+		case 53: // 5 - upper_camera
 			camera = cameras[1];
 			break;
+		case 54: // 6 - front_camera
+			camera = cameras[0];
+			break;
+		case 49:
+		case 50:
+		case 51:
+		case 52:
+			spotlights[e.keyCode - 49].toggleLight();
+			break;
+
 		case 81: // Q - toggle dir_light
-			toggleLight();
+			dirLight.visible = !dirLight.visible;
 			break;
 		case 87: // W - toggle basic/non-basic
-			material = materials[materials.indexOf(material) ? 0 : 1];
+			material = materials[materials.indexOf(material) ? 0 : 2];
 			break;
 		case 69: // E - toggle phong/lambert
 			if (materials.indexOf(material)) {
