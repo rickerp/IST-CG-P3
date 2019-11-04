@@ -3,6 +3,7 @@ import './three.js';
 export default class Painting extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
+
 		this.createBackground();
 		this.createGrid();
 		this.createDots();
@@ -11,7 +12,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createBackground() {
-		let material = new THREE.MeshBasicMaterial({
+		let material = new THREE.MeshPhongMaterial({
 			color: 0x666666,
 		});
 		let geometry = new THREE.CubeGeometry(0, 19, 25);
@@ -73,5 +74,13 @@ export default class Painting extends THREE.Object3D {
 		mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(1, 0, 13);
 		this.add(mesh);
+	}
+
+	changeMaterial(material) {
+		this.children.map(child => {
+			var childMat = material.clone();
+			childMat.color = child.material.color.clone();
+			child.material = childMat;
+		});
 	}
 }

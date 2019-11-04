@@ -25,4 +25,12 @@ export default class Room extends THREE.Object3D {
 		wall.position.set(x, y, z);
 		this.add(wall);
 	}
+
+	changeMaterial(material) {
+		this.children.map(child => {
+			var childMat = material.clone();
+			childMat.color = child.material.color.clone();
+			child.material = childMat;
+		});
+	}
 }
