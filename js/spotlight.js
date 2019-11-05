@@ -9,8 +9,6 @@ export default class SpotLight extends THREE.Object3D {
 		this.light = new THREE.SpotLight(0xffffee, 0.4);
 		this.add(this.light);
 		this.light.position.z = 5;
-
-		this.add(new THREE.AxesHelper(10));
 	}
 
 	addCone() {

@@ -5,7 +5,6 @@ export default class Sculpture extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
 
-		this.add(new THREE.AxesHelper(10));
 		this.materials = [
 			new THREE.MeshBasicMaterial({
 				color: 0xffffff,
