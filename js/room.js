@@ -14,21 +14,21 @@ export default class Room extends THREE.Object3D {
 	}
 
 	createFloor(x, y, z) {
-		let geometry = new THREE.CubeGeometry(30, 0, 50);
+		let geometry = new THREE.CubeGeometry(30, 0, 50, 10, 10, 10);
 		let floor = new THREE.Mesh(geometry, this.material);
 		floor.position.set(x, y, z);
 		this.add(floor);
 	}
 
 	createWall(x, y, z) {
-		let geometry = new THREE.CubeGeometry(1, 30, 50);
+		let geometry = new THREE.CubeGeometry(1, 30, 50, 10, 10, 10);
 		let wall = new THREE.Mesh(geometry, this.material);
 		wall.position.set(x, y, z);
 		this.add(wall);
 	}
 
 	createDivision(x, y, z) {
-		let geo = new THREE.CubeGeometry(0, 0, 50);
+		let geo = new THREE.CubeGeometry(0, 0, 50, 10, 10, 10);
 		let mat = this.material.clone();
 		mat.color = new THREE.Color(0x888888);
 		let line = new THREE.Mesh(geo, mat);

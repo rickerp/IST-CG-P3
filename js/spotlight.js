@@ -12,7 +12,7 @@ export default class SpotLight extends THREE.Object3D {
 	}
 
 	addCone() {
-		let coneGeo = new THREE.CylinderGeometry(3, 0, 10);
+		let coneGeo = new THREE.CylinderGeometry(3, 0, 10, 32, 32);
 		let coneMat = new THREE.MeshBasicMaterial({ color: 0x37aa98 });
 		let cone = new THREE.Mesh(coneGeo, coneMat);
 		cone.rotateX(Math.PI / 2);
