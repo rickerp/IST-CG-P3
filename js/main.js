@@ -31,27 +31,32 @@ function init() {
 	document.body.appendChild(renderer.domElement);
 	addScene();
 
-	cameras[0] = addCamera(10, 20, 0, 0); // ortographic camera
-	cameras[1] = addCamera(50, 30, 0, 1); // pespective camera
-	camera = cameras[1];
-
 	materials[0] = new THREE.MeshBasicMaterial();
 	materials[1] = new THREE.MeshPhongMaterial();
 	materials[2] = new THREE.MeshLambertMaterial();
 	material = materials[0];
 
-	dirLight = addDirLight(100, 100, 0);
-	spotlights[0] = addSpotLight(20, 40, 30);
-	spotlights[1] = addSpotLight(20, 40, -30);
-	spotlights[2] = addSpotLight(-20, 40, 30);
-	spotlights[3] = addSpotLight(-20, 40, -30);
-
 	room = addRoom(0, 0, 0);
-	painting = addPainting(0, 20, 0);
-	sculpture = addSculpture(0, 20, 20);
+	painting = addPainting(-15, 16, 8);
+	sculpture = addSculpture(-8, 12, -15);
+
+	dirLight = addDirLight(100, 100, 0);
+	spotlights[0] = addSpotLight(15, 35, 30);
+	spotlights[1] = addSpotLight(15, 35, -30);
+	spotlights[2] = addSpotLight(-15, 35, 30);
+	spotlights[3] = addSpotLight(-15, 35, -30);
+
+	cameras[0] = addCamera(
+		painting.position.x + 10,
+		painting.position.y,
+		painting.position.z,
+		0
+	); // ortographic camera
+	cameras[1] = addCamera(40, 30, 0, 1); // pespective camera
+	camera = cameras[1];
 
 	cameras[0].lookAt(painting.position);
-	cameras[1].lookAt(0, 20, 0);
+	cameras[1].lookAt(0, 15, 0);
 	cameras[0].zoom = 5;
 	cameras[1].zoom = 1;
 	camera.updateProjectionMatrix();
@@ -119,7 +124,7 @@ function addCamera(x, y, z, type) {
 
 function addScene() {
 	scene = new THREE.Scene();
-	scene.add(new THREE.AxisHelper(10));
+	scene.add(new THREE.AxesHelper(10));
 }
 
 //////////// UPDATE FUNCTIONS ////////////
@@ -211,7 +216,7 @@ function updateMaterials() {
 }
 
 function update(delta) {
-	sculpture.children[2].rotateY(delta * 1.2);
+	sculpture.ico.rotateY(delta * 1.2);
 	updateMaterials();
 }
 

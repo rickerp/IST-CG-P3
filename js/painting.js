@@ -12,7 +12,7 @@ export default class Painting extends THREE.Object3D {
 	}
 
 	createBackground() {
-		let material = new THREE.MeshPhongMaterial({
+		let material = new THREE.MeshBasicMaterial({
 			color: 0x666666,
 		});
 		let geometry = new THREE.CubeGeometry(0, 19, 25);
