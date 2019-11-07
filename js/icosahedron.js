@@ -17,22 +17,23 @@ export default class Icosahedron extends THREE.Object3D {
 	createGeometry(x, y, z) {
 		this.geometry = new THREE.Geometry();
 		let a = (1 + Math.sqrt(5)) / 2; // golden number
+		let r = () => Math.random();
 
-		let v0 = new THREE.Vector3(0, 1, a);
-		let v1 = new THREE.Vector3(a, 0, 1);
-		let v2 = new THREE.Vector3(1, a, 0);
+		let v0 = new THREE.Vector3(0 + r(), 1 + r(), a + r());
+		let v1 = new THREE.Vector3(a + r(), 0 + r(), 1 + r());
+		let v2 = new THREE.Vector3(1 + r(), a + r(), 0 + r());
 
-		let v3 = new THREE.Vector3(0, -1, a);
-		let v4 = new THREE.Vector3(a, 0, -1);
-		let v5 = new THREE.Vector3(-1, a, 0);
+		let v3 = new THREE.Vector3(0 + r(), -(1 + r()), a + r());
+		let v4 = new THREE.Vector3(a + r(), 0 + r(), -(1 + r()));
+		let v5 = new THREE.Vector3(-(1 + r()), a + r(), 0 + r());
 
-		let v6 = new THREE.Vector3(0, -1, -a);
-		let v7 = new THREE.Vector3(-a, 0, -1);
-		let v8 = new THREE.Vector3(-1, -a, 0);
+		let v6 = new THREE.Vector3(0 + r(), -(1 + r()), -(a + r()));
+		let v7 = new THREE.Vector3(-(a + r()), 0 + r(), -(1 + r()));
+		let v8 = new THREE.Vector3(-(1 + r()), -(a + r()), 0 + r());
 
-		let v9 = new THREE.Vector3(0, 1, -a);
-		let v10 = new THREE.Vector3(-a, 0, 1);
-		let v11 = new THREE.Vector3(1, -a, 0);
+		let v9 = new THREE.Vector3(0 + r(), 1 + r(), -(a + r()));
+		let v10 = new THREE.Vector3(-(a + r()), 0 + r(), 1 + r());
+		let v11 = new THREE.Vector3(1 + r(), -(a + r()), 0 + r());
 
 		this.geometry.vertices.push(v0);
 		this.geometry.vertices.push(v1);

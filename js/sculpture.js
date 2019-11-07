@@ -25,13 +25,13 @@ export default class Sculpture extends THREE.Object3D {
 	createPedestal(x, y, z) {
 		let material = this.materials[0];
 
-		let geometry = new THREE.CylinderGeometry(3, 3, 20, 32);
+		let geometry = new THREE.CylinderGeometry(3, 3, 20, 32, 32);
 
 		let mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(x, y, z);
 		this.add(mesh);
 
-		geometry = new THREE.CubeGeometry(8, 1, 8);
+		geometry = new THREE.CubeGeometry(8, 1, 8, 10, 10, 10);
 		mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(x, y + 10, z);
 		this.add(mesh);

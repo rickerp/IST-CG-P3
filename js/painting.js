@@ -15,7 +15,7 @@ export default class Painting extends THREE.Object3D {
 		let material = new THREE.MeshBasicMaterial({
 			color: 0x666666,
 		});
-		let geometry = new THREE.CubeGeometry(0, 19, 25);
+		let geometry = new THREE.CubeGeometry(0, 19, 25, 10, 10, 10);
 		this.add(new THREE.Mesh(geometry, material));
 	}
 
@@ -23,7 +23,7 @@ export default class Painting extends THREE.Object3D {
 		let material = new THREE.MeshBasicMaterial({
 			color: 0x000000,
 		});
-		let geometry = new THREE.CubeGeometry(0, 1.5, 1.5);
+		let geometry = new THREE.CubeGeometry(0, 1.5, 1.5, 10, 10, 10);
 		let mesh;
 		for (let z = 12; z >= -12; z -= 2) {
 			for (let y = 9; y >= -9; y -= 2) {
@@ -58,7 +58,7 @@ export default class Painting extends THREE.Object3D {
 		let geometry, mesh;
 
 		// top and bottom
-		geometry = new THREE.CubeGeometry(0, 1, 27);
+		geometry = new THREE.CubeGeometry(0, 1, 27, 10, 10, 10);
 		mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(1, 10, 0);
 		this.add(mesh);
@@ -67,7 +67,7 @@ export default class Painting extends THREE.Object3D {
 		this.add(mesh);
 
 		// left and right
-		geometry = new THREE.CubeGeometry(0, 20, 1);
+		geometry = new THREE.CubeGeometry(0, 20, 1, 10, 10, 10);
 		mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(1, 0, -13);
 		this.add(mesh);

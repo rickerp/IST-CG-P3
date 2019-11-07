@@ -124,7 +124,6 @@ function addCamera(x, y, z, type) {
 
 function addScene() {
 	scene = new THREE.Scene();
-	scene.add(new THREE.AxesHelper(10));
 }
 
 //////////// UPDATE FUNCTIONS ////////////
