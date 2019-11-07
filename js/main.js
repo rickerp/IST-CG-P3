@@ -43,8 +43,8 @@ function init() {
 	dirLight = addDirLight(100, 100, 0);
 	spotlights[0] = addSpotLight(15, 35, 30);
 	spotlights[1] = addSpotLight(15, 35, -30);
-	spotlights[2] = addSpotLight(-15, 35, 30);
-	spotlights[3] = addSpotLight(-15, 35, -30);
+	spotlights[2] = addSpotLight(-10, 35, 30);
+	spotlights[3] = addSpotLight(-10, 35, -30);
 
 	cameras[0] = addCamera(
 		painting.position.x + 10,
